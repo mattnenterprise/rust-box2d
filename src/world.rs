@@ -1,6 +1,5 @@
 use super::math::Vec2;
 use super::body::Body;
-use super::shape::shape::Shape;
 
 struct World {
 	gravity: Vec2,
