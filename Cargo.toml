@@ -1,0 +1,4 @@
+[package]
+name = "box2d"
+version = "0.0.1"
+authors = ["Matt McCoy <mattnenterprise@yahoo.com>"]
