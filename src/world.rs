@@ -1,14 +1,17 @@
 use super::math::Vec2;
 use super::body::Body;
+use super::broad_phase::BroadPhase;
+use super::default_broad_phase::DefaultBroadPhase;
 
-struct World {
+pub struct World {
 	gravity: Vec2,
+	broad_phase: Box<BroadPhase>,
 	bodies: Vec<Body>
 }
 
 impl World {
 	pub fn new(gravity: Vec2) -> World {
-		return World{ gravity: gravity, bodies: Vec::new() }
+		return World{ gravity: gravity, broad_phase: Box::new(DefaultBroadPhase::new()) , bodies: Vec::new() }
 	}
 
 	pub fn add_body(&mut self, body: Body) {
@@ -19,6 +22,8 @@ impl World {
 		self.bodies.clear();
 	}
 
-	pub fn step(timeStep: f32) {
+	pub fn step(&mut self, timeStep: f32) {
+		let pairs = self.broad_phase.run(&self.bodies);
+
 	}
 }

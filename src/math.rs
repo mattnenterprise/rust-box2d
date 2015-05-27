@@ -1,8 +1,9 @@
 use std::ops::{Add, Sub};
 
+#[derive(Clone)]
 pub struct Vec2 {
 	x: f32,
-	y: f32	
+	y: f32
 }
 
 impl Vec2 {
@@ -20,7 +21,7 @@ impl Vec2 {
 	}
 
 	pub fn dot(&mut self, o: Vec2) -> f32 {
-		return self.x * o.x + self.y * o.y; 
+		return self.x * o.x + self.y * o.y;
 	}
 
 	pub fn length(self) -> f32 {

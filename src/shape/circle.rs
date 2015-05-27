@@ -11,3 +11,9 @@ impl Shape for CircleShape {
         return "CircleShape";
     }
 }
+
+impl CircleShape {
+    pub fn new(center: Vec2, radius: f32) -> CircleShape {
+        return CircleShape{ center: center, radius: radius }
+    }
+}
