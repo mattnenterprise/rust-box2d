@@ -1,8 +1,8 @@
-use super::super::body_pair::BodyPair;
+use super::super::body::Body;
 use super::collider_result::ColliderResult;
 
 pub trait Collider {
-    fn new(pair: BodyPair) -> Self;
-    fn pair(&self) -> BodyPair;
+    fn new(pair: (Body, Body)) -> Self;
+    fn pair(&self) -> (Body, Body);
     fn colliding(&self) -> ColliderResult;
 }

@@ -16,6 +16,7 @@ pub struct BodyDef {
 
 #[derive(Clone)]
 pub struct Body {
+	pub shape: Shape,
 	body_type: BodyType,
 	position: Vec2,
 	angle: f32,
@@ -30,7 +31,7 @@ pub struct Body {
 
 
 impl Body {
-	pub fn new(body_def: BodyDef, shape: &Shape) {
+	pub fn new(body_def: BodyDef) {
 
 	}
 }
