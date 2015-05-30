@@ -4,7 +4,6 @@
 pub mod math;
 pub mod world;
 pub mod body;
-pub mod body_pair;
 pub mod shape;
 pub mod collision;
 pub mod broad_phase;
