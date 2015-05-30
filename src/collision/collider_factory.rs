@@ -5,7 +5,7 @@ use super::collider_result::ColliderResult;
 use super::circle_circle_collider::CircleCircleCollider;
 use super::circle_line_collider::CircleLineCollider;
 
-fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
+pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
     let a_body = body_pair.0;
     let b_body = body_pair.1;
     let ref a_shape = a_body.shape;

@@ -17,8 +17,29 @@ impl Collider for CircleCircleCollider {
     }
 
     fn colliding(&self) -> ColliderResult {
-        let a = self.pair().0;
-        let b = self.pair().1;
+        let a_shape = self.pair().0.shape;
+        let b_shape = self.pair().1.shape;
+
+        match (a_shape, b_shape) {
+            (CircleShape{center: center_a, radius: radius_a}, CircleShape{center: center_b, radius: radius_b}) => {
+                let normal = center_a - center_b;
+                let mut total_radius = radius_a + radius_b;
+                total_radius *= total_radius;
+
+                if(normal.length() * normal.length() > total_radius) {
+                    //No Collision
+                }
+
+                let distance = normal.length();
+
+
+
+            }
+            _ => {
+                //Something is wrong
+            }
+        };
+
         return ColliderResult;
     }
 }
