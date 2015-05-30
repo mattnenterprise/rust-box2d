@@ -1,6 +1,7 @@
 use super::super::body::Body;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;
+use super::super::shape::shape::Shape::{CircleShape, LineShape};
 
 pub struct CircleLineCollider {
     pair: (Body, Body)

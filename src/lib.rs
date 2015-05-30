@@ -8,5 +8,7 @@ pub mod body_pair;
 pub mod shape;
 pub mod collision;
 pub mod broad_phase;
+pub mod narrow_phase;
 pub mod manifold;
 mod default_broad_phase;
+mod default_narrow_phase;
