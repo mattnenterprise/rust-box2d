@@ -1,8 +1,8 @@
 use super::super::manifold::Manifold;
 
 pub struct ColliderResult {
-    manifold: Option<Manifold>,
-    is_colliding: bool
+    pub manifold: Option<Manifold>,
+    pub is_colliding: bool
 }
 
 impl ColliderResult {
