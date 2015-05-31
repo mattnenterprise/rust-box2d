@@ -34,6 +34,11 @@ impl World {
 	}
 
 	pub fn step(&mut self, timeStep: f32) {
+		let len = self.bodies.len();
+		for i in 0..len {
+			self.bodies[i].integrate(timeStep);
+		}
+
 		let pairs = self.broad_phase.run(&self.bodies);
 		let collider_results = self.narrow_phase.run(&pairs);
 		let mut manifolds: Vec<Manifold> = Vec::new();

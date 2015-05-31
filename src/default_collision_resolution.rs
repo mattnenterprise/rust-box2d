@@ -36,7 +36,6 @@ impl CollisionResolution for DefaultCollisionResolution {
                 let k_slop = 0.01;
                 let percent = 0.5;
                 let maximum = (manifold.penetration - k_slop).max(0.0);
-                //Need to check divide by zero!!!
                 let body_a_inv_mass = 1.0 / body_a.mass;
                 let body_b_inv_mass = 1.0 / body_b.mass;
                 let correction = manifold.normal.multiply(maximum / (body_a_inv_mass + body_b_inv_mass) * percent);
