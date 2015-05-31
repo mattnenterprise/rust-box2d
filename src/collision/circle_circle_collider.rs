@@ -1,7 +1,9 @@
 use super::super::body::Body;
-use super::collider::Collider;
-use super::collider_result::ColliderResult;
+use super::super::math::Vec2;
+use super::super::manifold::Manifold;
 use super::super::shape::shape::Shape::CircleShape;
+use super::collider_result::ColliderResult;
+use super::collider::Collider;
 
 pub struct CircleCircleCollider {
     pair: (Body, Body)
@@ -27,19 +29,26 @@ impl Collider for CircleCircleCollider {
                 total_radius *= total_radius;
 
                 if(normal.length() * normal.length() > total_radius) {
-                    //No Collision
+                    return ColliderResult::new_empty_false();
                 }
 
                 let distance = normal.length();
 
+                let mut manifold = Manifold{body_a: self.pair().0, body_b: self.pair().1, normal: Vec2::new(0.0, 0.0), penetration: 0.0};
 
+                if distance != 0.0 {
+                    manifold.penetration = f32::sqrt(total_radius) - distance;
+                    manifold.normal = normal.normal();
+                } else {
+                    manifold.penetration = radius_a;
+                    manifold.normal = Vec2::new(1.0, 0.0);
+                }
 
+                ColliderResult::new(Some(manifold), true)
             }
             _ => {
-                //Something is wrong
+                panic!("Something happened. Cannot test circle to circel collision without circles!!!");
             }
-        };
-
-        return ColliderResult;
+        }
     }
 }

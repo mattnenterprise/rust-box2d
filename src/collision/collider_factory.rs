@@ -15,11 +15,14 @@ pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
         (&CircleShape{..}, &CircleShape{..}) => {
             CircleCircleCollider::new((a_body.clone(), b_body.clone())).colliding()
         },
-        (&CircleShape{..}, &LineShape{..}) | (&LineShape{..}, &CircleShape{..}) => {
+        (&CircleShape{..}, &LineShape{..}) => {
             CircleLineCollider::new((a_body.clone(), b_body.clone())).colliding()
         },
+        (&LineShape{..}, &CircleShape{..}) => {
+            CircleLineCollider::new((b_body.clone(), a_body.clone())).colliding()
+        }
         _ => {
-            ColliderResult
+            ColliderResult::new_empty_false()
         }
     }
 }

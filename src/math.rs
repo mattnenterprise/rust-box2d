@@ -27,6 +27,22 @@ impl Vec2 {
 	pub fn length(self) -> f32 {
 		return f32::sqrt(self.x * self.x + self.y * self.y);
 	}
+
+	pub fn multiply(self, n: f32) -> Vec2 {
+		return Vec2 {x: self.x * n, y: self.y * n};
+	}
+
+	pub fn divide(self, n: f32) -> Vec2 {
+		return Vec2 {x: self.x / n, y: self.y / n};
+	}
+
+	pub fn normal(self) -> Vec2 {
+		let length = self.length();
+		if length == 0.0 {
+			panic!("Cannot find normal when length is zero");
+		}
+		return self.divide(length);
+	}
 }
 
 impl Add for Vec2 {
