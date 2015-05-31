@@ -17,18 +17,12 @@ pub struct BodyDef {
 #[derive(Clone)]
 pub struct Body {
 	pub shape: Shape,
-	body_type: BodyType,
-	position: Vec2,
-	angle: f32,
-	velocity: Vec2,
-	angularVelocity: f32,
-	force: Vec2,
-	torque: f32,
-	mass: f32,
-	inv_mass: f32
+	pub body_type: BodyType,
+	pub position: Vec2,
+	pub velocity: Vec2,
+	pub restitution: f32,
+	pub mass: f32
 }
-
-
 
 impl Body {
 	pub fn new(body_def: BodyDef) {

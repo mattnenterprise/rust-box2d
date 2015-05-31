@@ -23,7 +23,7 @@ impl Collider for CircleLineCollider {
         let line_shape = self.pair().1.shape;
 
         match (circle_shape, line_shape) {
-            (CircleShape{center: center, radius: radius}, LineShape{point1: point1, point2: point2}) => {
+            (CircleShape{center, radius}, LineShape{point1, point2}) => {
                 let segment_vector = point1 - point2;
                 let mut point_vector = center - point2;
 

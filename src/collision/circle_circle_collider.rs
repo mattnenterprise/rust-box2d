@@ -28,7 +28,7 @@ impl Collider for CircleCircleCollider {
                 let mut total_radius = radius_a + radius_b;
                 total_radius *= total_radius;
 
-                if(normal.length() * normal.length() > total_radius) {
+                if normal.length() * normal.length() > total_radius {
                     return ColliderResult::new_empty_false();
                 }
 
