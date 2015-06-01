@@ -13,7 +13,7 @@ pub struct World {
 	broad_phase: Box<BroadPhase>,
 	narrow_phase: Box<NarrowPhase>,
 	collision_resolution: Box<CollisionResolution>,
-	bodies: Vec<Body>
+	pub bodies: Vec<Body>
 }
 
 impl World {
