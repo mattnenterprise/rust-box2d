@@ -24,7 +24,10 @@ impl Collider for CircleCircleCollider {
 
         match (a_shape, b_shape) {
             (CircleShape{center: center_a, radius: radius_a}, CircleShape{center: center_b, radius: radius_b}) => {
-                let normal = center_a - center_b;
+                let global_center_a = self.pair().0.position + center_a;
+                let global_center_b = self.pair().1.position + center_b;
+
+                let normal = global_center_a - global_center_b;
                 let mut total_radius = radius_a + radius_b;
                 total_radius *= total_radius;
 

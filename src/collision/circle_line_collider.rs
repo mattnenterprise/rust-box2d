@@ -24,22 +24,26 @@ impl Collider for CircleLineCollider {
 
         match (circle_shape, line_shape) {
             (CircleShape{center, radius}, LineShape{point1, point2}) => {
-                let segment_vector = point1 - point2;
-                let mut point_vector = center - point2;
+                let global_circle_center = self.pair().0.position + center;
+                let global_point1 = self.pair().1.position + point1;
+                let global_point2 = self.pair().1.position + point2;
+
+                let segment_vector = global_point1 - global_point2;
+                let mut point_vector = global_circle_center - global_point2;
 
                 let scalar_projection = point_vector.dot(segment_vector.normal());
 
                 let mut closest_point = Vec2::new(0.0, 0.0);
 
                 if scalar_projection < 0.0 {
-                    closest_point = point2;
+                    closest_point = global_point2;
                 } else if scalar_projection > segment_vector.length() {
-                    closest_point = point1;
+                    closest_point = global_point1;
                 } else {
-                    closest_point = point2 + (segment_vector.normal().multiply(scalar_projection));
+                    closest_point = global_point2 + (segment_vector.normal().multiply(scalar_projection));
                 }
 
-                let distance_vector = center - closest_point;
+                let distance_vector = global_circle_center - closest_point;
 
                 if distance_vector.length() < radius {
                     let offset = distance_vector.normal().multiply((radius - distance_vector.length()));
