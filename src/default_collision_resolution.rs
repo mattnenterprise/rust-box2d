@@ -5,7 +5,7 @@ use super::math::Vec2;
 pub struct DefaultCollisionResolution;
 
 impl CollisionResolution for DefaultCollisionResolution {
-    fn run(&self, manifolds: &Vec<Manifold>) {
+    fn resolve_collisions(&mut self, manifolds: &Vec<Manifold>) {
         for m in manifolds.iter() {
             let manifold = m.clone();
             let mut body_a = manifold.body_a;

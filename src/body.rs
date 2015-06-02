@@ -9,13 +9,17 @@ pub enum BodyType {
 }
 
 pub struct BodyDef {
-	body_type: BodyType,
-	position: Vec2,
-	angle: f32,
+	pub shape: Shape,
+	pub body_type: BodyType,
+	pub position: Vec2,
+	pub velocity: Vec2,
+	pub restitution: f32,
+	pub mass: f32
 }
 
 #[derive(Clone)]
 pub struct Body {
+	pub id: usize,
 	pub shape: Shape,
 	pub body_type: BodyType,
 	pub position: Vec2,
@@ -25,6 +29,9 @@ pub struct Body {
 }
 
 impl Body {
+	pub fn new(id: usize, body_def: BodyDef) -> Body {
+		return Body{ id: id, shape: body_def.shape, body_type: body_def.body_type, position: body_def.position, velocity: body_def.velocity, restitution: body_def.restitution, mass: body_def.mass}
+	}
 	pub fn integrate(&mut self, timeStep: f32) {
 		if self.mass <= 0.0 {
 			return;
