@@ -32,7 +32,7 @@ impl Body {
 		let inv_mass = 1.0 / self.mass;
 		if !inv_mass.is_nan() && !inv_mass.is_infinite() && inv_mass > 0.0 && timeStep > 0.0 {
 			//Add gravity to the object;
-			let force_accum = Vec2::new(0.0, 3.0);
+			let force_accum = Vec2::new(0.0, 10.0);
 
 			let total_accel = force_accum.multiply(inv_mass);
 			self.velocity = self.velocity + total_accel.multiply(timeStep);
