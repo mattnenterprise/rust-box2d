@@ -48,7 +48,7 @@ impl Collider for CircleChainLineCollider {
 
                     let distance_vector = global_circle_center - closest_point;
 
-                    if i == 0 || distance_vector.length() > closest_line_distance.length() {
+                    if i == 0 || distance_vector.length() < closest_line_distance.length() {
                         closest_line_distance = distance_vector;
                     }
                 }
