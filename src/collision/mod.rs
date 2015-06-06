@@ -4,4 +4,7 @@ pub mod collider_factory;
 pub mod circle_circle_collider;
 pub mod circle_line_collider;
 pub mod circle_chain_line_collider;
+pub mod circle_polygon_collider;
+pub mod polygon_chain_line_collider;
+pub mod polygon_line_collider;
 pub mod polygon_polygon_collider;

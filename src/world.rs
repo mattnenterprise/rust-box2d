@@ -33,10 +33,10 @@ impl World {
 		self.bodies.clear();
 	}
 
-	pub fn step(&mut self, timeStep: f32) {
+	pub fn step(&mut self, time_step: f32) {
 		let len = self.bodies.len();
 		for i in 0..len {
-			self.bodies[i].integrate(timeStep);
+			self.bodies[i].integrate(time_step, self.gravity);
 		}
 
 		let pairs = self.broad_phase.run(&self.bodies);
@@ -62,8 +62,8 @@ impl CollisionResolution for World {
     fn resolve_collisions(&mut self, manifolds: &Vec<Manifold>) {
         for m in manifolds.iter() {
             let manifold = m.clone();
-            let mut body_a = manifold.body_a;
-            let mut body_b = manifold.body_b;
+            let body_a = manifold.body_a;
+            let body_b = manifold.body_b;
             let mut rv = body_b.velocity - body_a.velocity;
             let vel_along_normal = rv.dot(manifold.normal);
 
