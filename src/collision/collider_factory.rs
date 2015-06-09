@@ -1,9 +1,10 @@
-use super::super::shape::shape::Shape::{CircleShape, LineShape, ChainLineShape};
+use super::super::shape::shape::Shape::{CircleShape, LineShape, ChainLineShape, PolygonShape};
 use super::super::body::Body;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;
 use super::circle_circle_collider::CircleCircleCollider;
 use super::circle_line_collider::CircleLineCollider;
+use super::circle_polygon_collider::CirclePolygonCollider;
 use super::circle_chain_line_collider::CircleChainLineCollider;
 
 pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
@@ -27,6 +28,12 @@ pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
         },
         (&ChainLineShape{..}, &CircleShape{..}) => {
             CircleChainLineCollider::new((b_body.clone(), a_body.clone())).colliding()
+        },
+        (&CircleShape{..}, &PolygonShape{..}) => {
+            CirclePolygonCollider::new((a_body.clone(), b_body.clone())).colliding()
+        },
+        (&PolygonShape{..}, &CircleShape{..}) => {
+            CirclePolygonCollider::new((b_body.clone(), a_body.clone())).colliding()
         },
         _ => {
             ColliderResult::new_empty_false()
