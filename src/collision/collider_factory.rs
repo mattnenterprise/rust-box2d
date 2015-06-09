@@ -6,6 +6,7 @@ use super::circle_circle_collider::CircleCircleCollider;
 use super::circle_line_collider::CircleLineCollider;
 use super::circle_polygon_collider::CirclePolygonCollider;
 use super::circle_chain_line_collider::CircleChainLineCollider;
+use super::polygon_polygon_collider::PolygonPolygonCollider;
 
 pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
     let a_body = body_pair.0;
@@ -34,6 +35,9 @@ pub fn collider_factory(body_pair: (Body, Body)) -> ColliderResult {
         },
         (&PolygonShape{..}, &CircleShape{..}) => {
             CirclePolygonCollider::new((b_body.clone(), a_body.clone())).colliding()
+        },
+        (&PolygonShape{..}, &PolygonShape{..}) => {
+            PolygonPolygonCollider::new((a_body.clone(), b_body.clone())).colliding()
         },
         _ => {
             ColliderResult::new_empty_false()
