@@ -21,7 +21,7 @@ fn main() {
 
     // Create the window of the application
     let mut window = RenderWindow::new(VideoMode::new_init(800, 600, 32),
-                                       "SFML Example",
+                                       "Polygon Polygon Collision",
                                        Close,
                                        &ContextSettings::default())
                          .expect("Cannot create a new Render Window.");
@@ -79,8 +79,15 @@ fn main() {
                     }
                     window.draw_primitives(&global_points, PrimitiveType::LinesStrip);
                 },
-                _ => {
-                    //Error
+                box2d::shape::shape::Shape::PolygonShape{ref points} => {
+                    let mut global_points: Vec<Vertex> = Vec::new();
+                    for p in points.iter() {
+                        let global_point = world.bodies[i].position + *p;
+                        global_points.push(Vertex::new_with_pos_color(&Vector2f::new(global_point.x, global_point.y), &Color::red()));
+                    }
+                    let global_point = world.bodies[i].position + points[0];
+                    global_points.push(Vertex::new_with_pos_color(&Vector2f::new(global_point.x, global_point.y), &Color::red()));
+                    window.draw_primitives(&global_points, PrimitiveType::LinesStrip);
                 }
             }
         }
@@ -89,20 +96,15 @@ fn main() {
 }
 
 fn setup_box2d() -> World {
-    let mut world = World::new(Vec2::new(0.0, 2.0));
+    let mut world = World::new(Vec2::new(0.0, 5.0));
 
+    let polygon_shape = box2d::shape::shape::Shape::PolygonShape{ points: vec![Vec2::new(-75.0, -75.0), Vec2::new(-75.0, 75.0), Vec2::new(75.0, 75.0), Vec2::new(75.0, -75.0)] };
+    let polygon_body_def = BodyDef{shape: polygon_shape, body_type: BodyType::StaticBody, position: Vec2::new(400.0, 400.0), velocity: Vec2::new(0.0, 0.0), restitution: 1.0, mass: 0.0, gravity_scale: 1.0};
+    world.add_body(polygon_body_def);
 
-    /*let circle_shape = box2d::shape::shape::Shape::CircleShape { center: Vec2::new(0.0, 0.0), radius: 20.0 };
-    let circle_body_def = BodyDef{shape: circle_shape, body_type: BodyType::DynamicBody, position: Vec2::new(400.0, 200.0), velocity: Vec2::new(0.0, 0.0), restitution: 0.75, mass: 1.0, gravity_scale: 5.0};
-    world.add_body(circle_body_def);*/
-
-    let circle_shape2 = box2d::shape::shape::Shape::CircleShape { center: Vec2::new(0.0, 0.0), radius: 20.0 };
-    let circle_body_def2 = BodyDef{shape: circle_shape2, body_type: BodyType::DynamicBody, position: Vec2::new(300.0, 200.0), velocity: Vec2::new(0.0, 0.0), restitution: 0.75, mass: 1.0, gravity_scale: 10.0};
-    world.add_body(circle_body_def2);
-
-    let chain_line_shape = box2d::shape::shape::Shape::ChainLineShape{ points: vec![Vec2::new(-200.0, -50.0), Vec2::new(-100.0, 0.0), Vec2::new(100.0, 0.0), Vec2::new(200.0, -50.0)] };
-    let chain_line_body_def = BodyDef{shape: chain_line_shape, body_type: BodyType::StaticBody, position: Vec2::new(400.0, 400.0), velocity: Vec2::new(0.0, 0.0), restitution: 1.0, mass: 0.0, gravity_scale: 1.0};
-    world.add_body(chain_line_body_def);
+    let polygon_shape2 = box2d::shape::shape::Shape::PolygonShape{ points: vec![Vec2::new(-75.0, -75.0), Vec2::new(-75.0, 75.0), Vec2::new(75.0, 75.0), Vec2::new(75.0, -75.0)] };
+    let polygon_body_def2 = BodyDef{shape: polygon_shape2, body_type: BodyType::DynamicBody, position: Vec2::new(350.0, 100.0), velocity: Vec2::new(0.0, 0.0), restitution: 1.0, mass: 10.0, gravity_scale: 10.0};
+    world.add_body(polygon_body_def2);
 
     return world;
 }

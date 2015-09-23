@@ -102,7 +102,7 @@ impl CollisionResolution for World {
                     correction = manifold.normal.multiply(maximum / (body_a_inv_mass + body_b_inv_mass) * percent);
                 }
 
-                if body_a_inv_mass > 0.0 {
+                if !body_a_inv_mass.is_infinite() && !body_a_inv_mass.is_nan() && body_a_inv_mass > 0.0 {
 					self.bodies[body_a.id].position = body_a.position + correction.multiply(body_a_inv_mass);
                 }
 

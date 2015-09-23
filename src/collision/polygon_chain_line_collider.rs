@@ -1,6 +1,5 @@
 use super::super::shape::shape::Shape::{PolygonShape, ChainLineShape};
 use super::super::body::Body;
-use super::super::math::Vec2;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;
 
@@ -22,7 +21,7 @@ impl Collider for PolygonChainLineCollider {
         let chain_line_shape = self.pair().1.shape;
 
         match (polygon_shape, chain_line_shape) {
-            (PolygonShape{points: polygon_points}, ChainLineShape{points: chain_line_point}) => {
+            (PolygonShape{..}, ChainLineShape{..}) => {
                 return ColliderResult::new_empty_false();
             },
             _ => {

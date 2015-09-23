@@ -33,14 +33,12 @@ impl Collider for CircleLineCollider {
 
                 let scalar_projection = point_vector.dot(segment_vector.normal());
 
-                let mut closest_point = Vec2::new(0.0, 0.0);
+                let mut closest_point = global_point2 + (segment_vector.normal().multiply(scalar_projection));
 
                 if scalar_projection < 0.0 {
                     closest_point = global_point2;
                 } else if scalar_projection > segment_vector.length() {
                     closest_point = global_point1;
-                } else {
-                    closest_point = global_point2 + (segment_vector.normal().multiply(scalar_projection));
                 }
 
                 let distance_vector = global_circle_center - closest_point;

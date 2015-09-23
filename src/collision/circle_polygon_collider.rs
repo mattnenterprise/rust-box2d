@@ -1,6 +1,5 @@
 use super::super::shape::shape::Shape::{CircleShape, PolygonShape};
 use super::super::body::Body;
-use super::super::math::Vec2;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;
 
@@ -22,7 +21,7 @@ impl Collider for CirclePolygonCollider {
         let polygon_shape = self.pair().1.shape;
 
         match (circle_shape, polygon_shape) {
-            (CircleShape{center, radius}, PolygonShape{points}) => {
+            (CircleShape{..}, PolygonShape{..}) => {
                 return ColliderResult::new_empty_false();
             },
             _ => {

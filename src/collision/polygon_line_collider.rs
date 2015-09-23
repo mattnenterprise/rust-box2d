@@ -1,6 +1,5 @@
 use super::super::shape::shape::Shape::{PolygonShape, LineShape};
 use super::super::body::Body;
-use super::super::math::Vec2;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;
 
@@ -22,7 +21,7 @@ impl Collider for PolygonLineCollider {
         let line_shape = self.pair().1.shape;
 
         match (polygon_shape, line_shape) {
-            (PolygonShape{points}, LineShape{point1, point2}) => {
+            (PolygonShape{..}, LineShape{..}) => {
                 return ColliderResult::new_empty_false();
             },
             _ => {
