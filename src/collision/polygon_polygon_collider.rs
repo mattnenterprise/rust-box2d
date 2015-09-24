@@ -28,13 +28,13 @@ impl Collider for PolygonPolygonCollider {
                 let mut axes_one: Vec<Vec2> = Vec::new();
                 let mut axes_two: Vec<Vec2> = Vec::new();
 
-                for (p1, p2) in get_lines(points_a.clone()) {
+                for (p1, p2) in get_lines(points_a.clone(), self.pair().0.position) {
                     let edge: Vec2 = p2 - p1;
                     let normal: Vec2 = Vec2::new((-1.0 * edge.y), edge.x);
                     axes_one.push(normal.normal());
                 }
 
-                for (p1, p2) in get_lines(points_b.clone()) {
+                for (p1, p2) in get_lines(points_b.clone(), self.pair().1.position) {
                     let edge: Vec2 = p2 - p1;
                     let normal: Vec2 = Vec2::new((-1.0 * edge.y), edge.x);
                     axes_two.push(normal.normal());
@@ -134,15 +134,15 @@ fn get_max(points: &Vec<Vec2>, axis: Vec2, position: Vec2) -> f32 {
     return max;
 }
 
-fn get_lines(points: Vec<Vec2>) -> Vec<(Vec2, Vec2)> {
+fn get_lines(points: Vec<Vec2>, position: Vec2) -> Vec<(Vec2, Vec2)> {
     let mut lines: Vec<(Vec2, Vec2)> = Vec::new();
     for index in 0..(points.len() - 1) {
-	    let p1: Vec2 = points[index];
-	    let p2: Vec2 = points[index + 1];
+	    let p1: Vec2 = points[index] + position;
+	    let p2: Vec2 = points[index + 1] + position;
 	    lines.push( (p1, p2) );
 	    if index == points.len() - 2 {
-		    let point1: Vec2 = points[index + 1];
-		    let point2: Vec2 = points[0];
+		    let point1: Vec2 = points[index + 1] + position;
+		    let point2: Vec2 = points[0] + position;
 		    lines.push( (point1,point2) );
 	    }
      }
