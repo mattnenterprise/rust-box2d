@@ -36,6 +36,10 @@ impl Vec2 {
 		return Vec2 {x: self.x / n, y: self.y / n};
 	}
 
+	pub fn cross(self, o: Vec2) -> f32 {
+		return self.x * o.y - self.y * o.x;
+	}
+
 	pub fn normal(self) -> Vec2 {
 		let length = self.length();
 		if length == 0.0 {
@@ -58,5 +62,24 @@ impl Sub for Vec2 {
 
 	fn sub(self, _rhs: Vec2) -> Vec2 {
 		return Vec2::new(self.x - _rhs.x, self.y - _rhs.y);
+	}
+}
+
+/*
+	Has the following format
+	[a11 a12]
+	[a21 a22]
+*/
+pub struct Mat22 {
+	pub c1: Vec2,
+	pub c2: Vec2
+}
+
+impl Mat22 {
+	pub fn new(a11: f32, a12: f32, a21: f32, a22: f32) -> Mat22 {
+		return Mat22 {
+			c1: Vec2::new(a11, a21),
+			c2: Vec2::new(a12, a22)
+		}
 	}
 }
