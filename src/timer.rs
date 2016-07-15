@@ -1,5 +1,6 @@
 use time::precise_time_ns;
 
+/// Timer for profiling
 pub struct Timer {
     start: u64
 }
