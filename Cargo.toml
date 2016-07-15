@@ -8,5 +8,5 @@ readme = "README.md"
 license = "MIT"
 
 [dev-dependencies]
-sfml = "*"
-time = "*"
+sfml = "0.9.3"
+time = "0.1.34"
