@@ -1,10 +1,48 @@
+sudo: false
 env:
   global:
-    - LD_LIBRARY_PATH=/usr/lib
+    - LD_LIBRARY_PATH=/home/travis/build/mattnenterprise/rust-box2d/sfml_install/usr/local/lib
 language: rust
-before_install:
-  - sudo apt-get install libsfml-dev
-  - sudo dpkg -L libsfml-dev
+###########################################################################################
+### put this in a bash script and modify the paths to fit your own directory structure for
+### easy compiling and installing of SFML libraries
 script:
+  - mkdir sfml_install
+  # TODO: Maybe investigate why the certificate checks for the SFML sources fail
+  - wget http://www.sfml-dev.org/files/SFML-2.3.2-sources.zip --no-check-certificate
+  - unzip -q SFML-2.3.2-sources.zip
+  - pushd SFML-2.3.2 && mkdir build && cd build && cmake .. && make
+  - make DESTDIR=/home/travis/build/zakkor/rust-sfml-rocket/sfml_install install
+  - popd
+  - wget http://www.sfml-dev.org/files/CSFML-2.3-sources.zip --no-check-certificate
+  - unzip -q CSFML-2.3-sources.zip
+  - pushd CSFML-2.3
+  - mkdir cmake/Modules
+  - cp /home/travis/build/mattnenterprise/rust-box2d/sfml_install/usr/local/share/SFML/cmake/Modules/FindSFML.cmake cmake/Modules
+  - mkdir build && cd build && cmake -DCMAKE_MODULE_PATH=/home/travis/build/mattnenterprise/rust-box2d/CSFML-2.3/cmake/Modules -DSFML_ROOT=/home/travis/build/mattnenterprise/rust-box2d/sfml_install/usr/local .. && make
+  - make DESTDIR=/home/travis/build/mattnenterprise/rust-box2d/sfml_install install
+  - popd
+  - mkdir .cargo
+  - mv .travis.cargo.config .cargo/config
   - cargo build --verbose
   - cargo test --verbose
+addons:
+  apt:
+    packages:
+    ### make sure you have these packages installed (or the equivalent for your distro)
+    - libpthread-stubs0-dev
+    - libgl1-mesa-dev
+    - libx11-dev
+    - libx11-xcb-dev
+    - libxcb-image0-dev
+    - libxrandr-dev
+    - libxcb-randr0-dev
+    - libudev-dev
+    - libfreetype6-dev
+    - libglew-dev
+    - libjpeg8-dev
+    - libgpgme11-dev
+    - libsndfile1-dev
+    - libopenal-dev
+    - libjpeg62
+    - cmake
