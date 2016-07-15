@@ -9,9 +9,9 @@ language: rust
 script:
   - mkdir sfml_install
   # TODO: Maybe investigate why the certificate checks for the SFML sources fail
-  - wget http://www.sfml-dev.org/files/SFML-2.3.2-sources.zip --no-check-certificate
-  - unzip -q SFML-2.3.2-sources.zip
-  - pushd SFML-2.3.2 && mkdir build && cd build && cmake .. && make
+  - wget http://www.sfml-dev.org/files/SFML-2.3.1-sources.zip --no-check-certificate
+  - unzip -q SFML-2.3.1-sources.zip
+  - pushd SFML-2.3.  && mkdir build && cd build && cmake .. && make
   - make DESTDIR=/home/travis/build/mattnenterprise/rust-box2d/sfml_install install
   - popd
   - wget http://www.sfml-dev.org/files/CSFML-2.3-sources.zip --no-check-certificate
