@@ -12,7 +12,7 @@ script:
   - wget http://www.sfml-dev.org/files/SFML-2.3.2-sources.zip --no-check-certificate
   - unzip -q SFML-2.3.2-sources.zip
   - pushd SFML-2.3.2 && mkdir build && cd build && cmake .. && make
-  - make DESTDIR=/home/travis/build/zakkor/rust-sfml-rocket/sfml_install install
+  - make DESTDIR=/home/travis/build/mattnenterprise/rust-box2d/sfml_install install
   - popd
   - wget http://www.sfml-dev.org/files/CSFML-2.3-sources.zip --no-check-certificate
   - unzip -q CSFML-2.3-sources.zip
