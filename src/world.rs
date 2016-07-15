@@ -81,11 +81,11 @@ impl CollisionResolution for World {
                     j /= 1.0 / body_b.mass;
                 }
 
-                let impulse = manifold.normal.multiply(j);
+                let impulse = manifold.normal * j;
                 if body_a.mass != 0.0 {
-					self.bodies[body_a.id].velocity = body_a.velocity - impulse.multiply(1.0 / body_a.mass);
+					self.bodies[body_a.id].velocity = body_a.velocity - impulse * (1.0 / body_a.mass);
                 } if body_b.mass != 0.0 {
-					self.bodies[body_b.id].velocity = body_b.velocity - impulse.multiply(1.0 / body_b.mass);
+					self.bodies[body_b.id].velocity = body_b.velocity - impulse * (1.0 / body_b.mass);
                 }
 
                 let k_slop = 0.01;
@@ -95,19 +95,19 @@ impl CollisionResolution for World {
                 let body_b_inv_mass = 1.0 / body_b.mass;
                 let mut correction = Vec2::new(0.0, 0.0);
                 if body_b_inv_mass.is_infinite() || body_b_inv_mass.is_nan() {
-                    correction = manifold.normal.multiply(maximum / (body_a_inv_mass) * percent);
+                    correction = manifold.normal * (maximum / (body_a_inv_mass) * percent);
                 } else if body_a_inv_mass.is_infinite() || body_a_inv_mass.is_nan() {
-                    correction = manifold.normal.multiply(maximum / (body_b_inv_mass) * percent);
+                    correction = manifold.normal * (maximum / (body_b_inv_mass) * percent);
                 } else {
-                    correction = manifold.normal.multiply(maximum / (body_a_inv_mass + body_b_inv_mass) * percent);
+                    correction = manifold.normal * (maximum / (body_a_inv_mass + body_b_inv_mass) * percent);
                 }
 
                 if !body_a_inv_mass.is_infinite() && !body_a_inv_mass.is_nan() && body_a_inv_mass > 0.0 {
-					self.bodies[body_a.id].position = body_a.position + correction.multiply(body_a_inv_mass);
+					self.bodies[body_a.id].position = body_a.position + correction * body_a_inv_mass;
                 }
 
                 if !body_b_inv_mass.is_infinite() && !body_b_inv_mass.is_nan() && body_b_inv_mass > 0.0 {
-					self.bodies[body_b.id].position = body_b.position - correction.multiply(body_b_inv_mass);
+					self.bodies[body_b.id].position = body_b.position - correction * body_b_inv_mass;
                 }
             }
         }

@@ -42,11 +42,11 @@ impl Body {
 		let inv_mass = 1.0 / self.mass;
 		if !inv_mass.is_nan() && !inv_mass.is_infinite() && inv_mass > 0.0 && time_step > 0.0 {
 			//Add gravity to the object;
-			let force_accum = gravity.multiply(self.gravity_scale);
+			let force_accum = gravity * self.gravity_scale;
 
-			let total_accel = force_accum.multiply(inv_mass);
-			self.velocity = self.velocity + total_accel.multiply(time_step);
-			self.position = self.position + self.velocity.multiply(time_step);
+			let total_accel = force_accum * inv_mass;
+			self.velocity = self.velocity + total_accel * time_step;
+			self.position = self.position + self.velocity * time_step;
 		}
 	}
 }

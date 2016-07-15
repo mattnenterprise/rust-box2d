@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub, Neg};
+use std::ops::{Add, AddAssign, Sub, SubAssign, Neg, Mul, MulAssign};
 
 #[derive(Clone, Copy, Debug)]
 pub struct Vec2 {
@@ -32,10 +32,6 @@ impl Vec2 {
 		return f32::sqrt(self.x * self.x + self.y * self.y);
 	}
 
-	pub fn multiply(self, n: f32) -> Vec2 {
-		return Vec2 {x: self.x * n, y: self.y * n};
-	}
-
 	pub fn divide(self, n: f32) -> Vec2 {
 		return Vec2 {x: self.x / n, y: self.y / n};
 	}
@@ -61,12 +57,41 @@ impl Add for Vec2 {
 	}
 }
 
+impl AddAssign for Vec2 {
+    fn add_assign(&mut self, _rhs: Vec2) {
+        self.x += _rhs.x;
+		self.y += _rhs.y;
+    }
+}
+
 impl Sub for Vec2 {
 	type Output = Vec2;
 
 	fn sub(self, _rhs: Vec2) -> Vec2 {
 		return Vec2::new(self.x - _rhs.x, self.y - _rhs.y);
 	}
+}
+
+impl SubAssign for Vec2 {
+    fn sub_assign(&mut self, _rhs: Vec2) {
+		self.x -= _rhs.x;
+		self.y -= _rhs.y;
+    }
+}
+
+impl Mul<f32> for Vec2 {
+	type Output = Vec2;
+
+    fn mul(self, _rhs: f32) -> Vec2 {
+        return Vec2::new(self.x * _rhs, self.y * _rhs);
+    }
+}
+
+impl MulAssign<f32> for Vec2 {
+    fn mul_assign(&mut self, _rhs: f32) {
+        self.x *= _rhs;
+		self.y *= _rhs;
+    }
 }
 
 impl Neg for Vec2 {
@@ -81,6 +106,7 @@ impl Neg for Vec2 {
 	Has the following format
 	[a11 a12]
 	[a21 a22]
+	Stored in column-major order.
 */
 pub struct Mat22 {
 	pub c1: Vec2,

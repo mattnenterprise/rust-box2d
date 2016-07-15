@@ -44,7 +44,7 @@ impl Collider for CirclePolygonCollider {
                     } else if scalar_projection > segment_vector.length() {
                         closest_point = global_p1;
                     } else {
-                        closest_point = global_p2 + segment_vector.normal().multiply(scalar_projection);
+                        closest_point = global_p2 + segment_vector.normal() * scalar_projection;
                     }
 
                     let distance_vector = global_circle_center - closest_point;
@@ -72,7 +72,7 @@ impl Collider for CirclePolygonCollider {
                 } else if scalar_projection > segment_vector.length() {
                     closest_point = global_p1;
                 } else {
-                    closest_point = global_p2 + segment_vector.normal().multiply(scalar_projection);
+                    closest_point = global_p2 + segment_vector.normal() * scalar_projection;
                 }
 
                 let distance_vector = global_circle_center - closest_point;
@@ -82,7 +82,7 @@ impl Collider for CirclePolygonCollider {
                 }
 
                 if closest_line_distance.length() < radius {
-                    let offset = closest_line_distance.normal().multiply(radius - closest_line_distance.length());
+                    let offset = closest_line_distance.normal() * (radius - closest_line_distance.length());
                     let manifold = Manifold{body_a: self.pair().0, body_b: self.pair().1, normal: offset.normal(), penetration: offset.length()};
                     return ColliderResult::new(Some(manifold), true);
                 }

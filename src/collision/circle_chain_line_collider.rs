@@ -36,7 +36,7 @@ impl Collider for CircleChainLineCollider {
 
                     let scalar_projection = point_vector.dot(segment_vector.normal());
 
-                    let mut closest_point = global_point2 + segment_vector.normal().multiply(scalar_projection);
+                    let mut closest_point = global_point2 + segment_vector.normal() * scalar_projection;
 
                     if scalar_projection < 0.0 {
                         closest_point = global_point2;
@@ -52,7 +52,7 @@ impl Collider for CircleChainLineCollider {
                 }
 
                 if closest_line_distance.length() < radius {
-                    let offset = closest_line_distance.normal().multiply((radius - closest_line_distance.length()));
+                    let offset = closest_line_distance.normal() * (radius - closest_line_distance.length());
                     let mut manifold = Manifold{body_a: self.pair().0, body_b: self.pair().1, normal: Vec2::new(0.0, 0.0), penetration: 0.0};
                     manifold.normal = offset.normal();
                     manifold.penetration = offset.length();
