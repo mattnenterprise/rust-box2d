@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub};
+use std::ops::{Add, Sub, Neg};
 
 #[derive(Clone, Copy, Debug)]
 pub struct Vec2 {
@@ -67,6 +67,14 @@ impl Sub for Vec2 {
 	fn sub(self, _rhs: Vec2) -> Vec2 {
 		return Vec2::new(self.x - _rhs.x, self.y - _rhs.y);
 	}
+}
+
+impl Neg for Vec2 {
+	type Output = Vec2;
+
+	fn neg(self) -> Vec2 {
+		Vec2::new(-self.x, -self.y)
+    }
 }
 
 /*
