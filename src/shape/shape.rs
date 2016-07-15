@@ -7,3 +7,10 @@ pub enum Shape {
      ChainLineShape{points: Vec<Vec2>},
      PolygonShape{points: Vec<Vec2>},
 }
+
+pub enum ShapeType {
+    Circle,
+    Edge,
+    Polygon,
+    Chain
+}
