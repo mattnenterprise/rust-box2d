@@ -7,6 +7,9 @@ description = "Port of Box2d to Rust"
 readme = "README.md"
 license = "MIT"
 
+[dependencies]
+time = "0.1.34"
+
 [dev-dependencies]
 sfml = "0.11.2"
 time = "0.1.34"
