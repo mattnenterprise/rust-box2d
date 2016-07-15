@@ -1,5 +1,5 @@
 use super::body::Body;
-use super::math::Vec2;
+use super::common::math::Vec2;
 
 #[derive(Clone)]
 pub struct Manifold {

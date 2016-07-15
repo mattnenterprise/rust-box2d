@@ -1,4 +1,4 @@
-use super::math::Vec2;
+use super::common::math::Vec2;
 use super::body::BodyDef;
 use super::body::Body;
 use super::manifold::Manifold;
