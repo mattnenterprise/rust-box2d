@@ -100,11 +100,11 @@ fn setup_box2d() -> World {
     let mut world = World::new(Vec2::new(0.0, 2.0));
 
     let circle_shape = box2d::shape::shape::Shape::CircleShape { center: Vec2::new(0.0, 0.0), radius: 20.0 };
-    let circle_body_def = BodyDef{shape: circle_shape, body_type: BodyType::DynamicBody, position: Vec2::new(300.0, 200.0), velocity: Vec2::new(0.0, 0.0), restitution: 0.75, mass: 1.0, gravity_scale: 10.0};
+    let circle_body_def = BodyDef{shape: circle_shape, body_type: BodyType::DynamicBody, position: Vec2::new(300.0, 200.0), velocity: Vec2::new(0.0, 0.0), restitution: 0.75, mass: 1.0, gravity_scale: 10.0, linearVelocity: Vec2::zero(), angularVelocity: 0.0, angle: 0.0, linearDamping: 0.0, angularDamping: 0.0};
     world.add_body(circle_body_def);
 
     let chain_line_shape = box2d::shape::shape::Shape::ChainLineShape{ points: vec![Vec2::new(-200.0, -50.0), Vec2::new(-100.0, 0.0), Vec2::new(100.0, 0.0), Vec2::new(200.0, -50.0)] };
-    let chain_line_body_def = BodyDef{shape: chain_line_shape, body_type: BodyType::StaticBody, position: Vec2::new(400.0, 400.0), velocity: Vec2::new(0.0, 0.0), restitution: 1.0, mass: 0.0, gravity_scale: 1.0};
+    let chain_line_body_def = BodyDef{shape: chain_line_shape, body_type: BodyType::StaticBody, position: Vec2::new(400.0, 400.0), velocity: Vec2::new(0.0, 0.0), restitution: 1.0, mass: 0.0, gravity_scale: 1.0, linearVelocity: Vec2::zero(), angularVelocity: 0.0, angle: 0.0, linearDamping: 0.0, angularDamping: 0.0};
     world.add_body(chain_line_body_def);
 
     return world;

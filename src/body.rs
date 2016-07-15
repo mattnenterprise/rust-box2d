@@ -1,6 +1,10 @@
 use super::math::Vec2;
 use super::shape::shape::Shape;
 
+/// The body type.
+/// static: zero mass, zero velocity, my be manually moved
+/// kinemetic: zero mass, non-zero velocity set by user, moved by solver
+/// dynamic: positive mass, non-zero velocity determined by forces, moved by solver
 #[derive(Clone)]
 pub enum BodyType {
 	StaticBody,
@@ -12,6 +16,11 @@ pub struct BodyDef {
 	pub shape: Shape,
 	pub body_type: BodyType,
 	pub position: Vec2,
+	pub angle: f32,
+	pub linearVelocity: Vec2,
+	pub angularVelocity: f32,
+	pub linearDamping: f32,
+	pub angularDamping: f32,
 	pub velocity: Vec2,
 	pub restitution: f32,
 	pub mass: f32,
