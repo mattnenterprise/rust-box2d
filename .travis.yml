@@ -1,3 +1,6 @@
+env:
+  global:
+    - LD_LIBRARY_PATH=/usr/lib
 language: rust
 before_install:
   - sudo apt-get install libsfml-dev
