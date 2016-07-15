@@ -1,6 +1,7 @@
 language: rust
 before_install:
   - sudo apt-get install libsfml-dev
+  - sudo dpkg -L libsfml-dev
 script:
   - cargo build --verbose
   - cargo test --verbose
