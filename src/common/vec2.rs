@@ -24,8 +24,9 @@ impl Vec2 {
 		self.y = y;
 	}
 
-	pub fn dot(&mut self, o: Vec2) -> f32 {
-		return self.x * o.x + self.y * o.y;
+	/// Perform the dot product of two vectors.
+	pub fn dot(a: Vec2, b: Vec2) -> f32 {
+		return a.x * b.x + a.y * b.y;
 	}
 
 	pub fn length(self) -> f32 {
@@ -36,8 +37,21 @@ impl Vec2 {
 		return Vec2 {x: self.x / n, y: self.y / n};
 	}
 
-	pub fn cross(self, o: Vec2) -> f32 {
-		return self.x * o.y - self.y * o.x;
+	/// Perform the cross product on two vectors. In 2D this produces a scalar.
+	pub fn cross_vec(a: Vec2, b: Vec2) -> f32 {
+		a.x * b.y - a.y * b.x
+	}
+
+	/// Perform a cross product on a vector and a scalar. In 2D this produces
+	/// a vector.
+	pub fn cross_vec_scalar(a: Vec2, s: f32) -> Vec2 {
+		Vec2::new(s * a.y, -s * a.x)
+	}
+
+	/// Perform the cross product on a scalar and a vector. In 2D this produces
+	/// a vector.
+	pub fn cross_scalar_vec(s: f32, a: Vec2) -> Vec2 {
+		Vec2::new(-s * a.y, s * a.x)
 	}
 
 	pub fn normal(self) -> Vec2 {

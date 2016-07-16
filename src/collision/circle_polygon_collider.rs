@@ -33,9 +33,9 @@ impl Collider for CirclePolygonCollider {
                     let global_p2: Vec2 = points[index + 1] + self.pair().1.position;
 
                     let segment_vector = global_p1 - global_p2;
-                    let mut point_vector = global_circle_center - global_p2;
+                    let point_vector = global_circle_center - global_p2;
 
-                    let scalar_projection: f32 = point_vector.dot(segment_vector.normal());
+                    let scalar_projection: f32 = Vec2::dot(point_vector, segment_vector.normal());
 
                     let mut closest_point = Vec2::new(0.0, 0.0);
 
@@ -61,9 +61,9 @@ impl Collider for CirclePolygonCollider {
                 let global_p1: Vec2 = points[points.len()-1] + self.pair().1.position;
                 let global_p2: Vec2 = points[0] + self.pair().1.position;
                 let segment_vector = global_p1 - global_p2;
-                let mut point_vector = global_circle_center - global_p2;
+                let point_vector = global_circle_center - global_p2;
 
-                let scalar_projection: f32 = point_vector.dot(segment_vector.normal());
+                let scalar_projection: f32 = Vec2::dot(point_vector, segment_vector.normal());
 
                 let mut closest_point = Vec2::new(0.0, 0.0);
 

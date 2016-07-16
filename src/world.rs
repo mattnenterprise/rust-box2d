@@ -65,7 +65,7 @@ impl CollisionResolution for World {
             let body_a = manifold.body_a;
             let body_b = manifold.body_b;
             let mut rv = body_b.velocity - body_a.velocity;
-            let vel_along_normal = rv.dot(manifold.normal);
+            let vel_along_normal = Vec2::dot(rv, manifold.normal);
 
             if vel_along_normal > 0.0 {
                 let a_restitution = body_a.restitution;

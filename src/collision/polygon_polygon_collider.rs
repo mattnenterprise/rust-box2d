@@ -113,22 +113,22 @@ impl Collider for PolygonPolygonCollider {
 }
 
 fn get_min(points: &Vec<Vec2>, axis: Vec2, position: Vec2) -> f32 {
-    let mut min: f32 = (points[0] + position).dot(axis);
+    let mut min: f32 = Vec2::dot((points[0] + position), axis);
     for point in points.iter() {
-        let mut new_point = point.clone() + position;
-        if new_point.dot(axis) < min {
-            min = new_point.dot(axis);
+        let new_point = point.clone() + position;
+        if Vec2::dot(new_point, axis) < min {
+            min = Vec2::dot(new_point, axis);
         }
     }
     return min;
 }
 
 fn get_max(points: &Vec<Vec2>, axis: Vec2, position: Vec2) -> f32 {
-    let mut max: f32 = (points[0] + position).dot(axis);
+    let mut max: f32 = Vec2::dot((points[0] + position), axis);
     for point in points.iter() {
-        let mut new_point = point.clone() + position;
-        if new_point.dot(axis) > max {
-            max = new_point.dot(axis);
+        let new_point = point.clone() + position;
+        if Vec2::dot(new_point, axis) > max {
+            max = Vec2::dot(new_point, axis);
         }
     }
     return max;

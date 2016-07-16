@@ -32,9 +32,9 @@ impl Collider for CircleChainLineCollider {
                     let global_point2 = points[i+1] + self.pair().1.position;
 
                     let segment_vector = global_point1 - global_point2;
-                    let mut point_vector = global_circle_center - global_point2;
+                    let point_vector = global_circle_center - global_point2;
 
-                    let scalar_projection = point_vector.dot(segment_vector.normal());
+                    let scalar_projection = Vec2::dot(point_vector, segment_vector.normal());
 
                     let mut closest_point = global_point2 + segment_vector.normal() * scalar_projection;
 

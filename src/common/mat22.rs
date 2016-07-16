@@ -1,11 +1,6 @@
 use super::Vec2;
 
-/*
-	Has the following format
-	[a11 a12]
-	[a21 a22]
-	Stored in column-major order.
-*/
+/// A 2-by-2 matrix. Stored in column-major order.
 pub struct Mat22 {
 	pub ex: Vec2,
 	pub ey: Vec2
