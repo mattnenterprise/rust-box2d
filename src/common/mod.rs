@@ -1,5 +1,6 @@
 pub mod settings;
 pub mod timer;
+pub mod math;
 mod vec2;
 mod vec3;
 mod mat22;
