@@ -1,3 +1,4 @@
+use super::Vec2;
 
 /// Rotation
 pub struct Rot {
@@ -33,8 +34,8 @@ impl Rot {
     }
 
     /// Get the angle in radians
-    pub fn get_angle() -> f32 {
-        s.atan2(c)
+    pub fn get_angle(&mut self) -> f32 {
+        self.s.atan2(self.c)
     }
 
     /// Get the x-axis
