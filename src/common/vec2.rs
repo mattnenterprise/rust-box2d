@@ -15,13 +15,13 @@ impl Vec2 {
 		return Vec2 {x: 0.0, y: 0.0}
 	}
 
+    pub fn set_zero(&mut self) {
+		self.set(0.0, 0.0)
+	}
+
 	pub fn set(&mut self, x: f32, y: f32) {
 		self.x = x;
 		self.y = y;
-	}
-
-	pub fn set_zero(&mut self) {
-		self.set(0.0, 0.0)
 	}
 
 	pub fn dot(&mut self, o: Vec2) -> f32 {

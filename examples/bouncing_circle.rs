@@ -9,7 +9,7 @@ use sfml::graphics::{RenderWindow, RenderTarget, CircleShape, Color, Vertex, Sha
 use box2d::world::World;
 use box2d::body::BodyDef;
 use box2d::body::BodyType;
-use box2d::common::math::Vec2;
+use box2d::common::Vec2;
 
 use time::Duration;
 use time::get_time;
