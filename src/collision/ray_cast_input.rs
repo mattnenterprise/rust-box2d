@@ -1,5 +1,6 @@
 use super::super::common::Vec2;
 
+/// Ray-cast input data. The ray extends from p1 to p1 + maxFraction * (p2 - p1).
 pub struct RayCastInput {
     pub p1: Vec2,
     pub p2: Vec2,
