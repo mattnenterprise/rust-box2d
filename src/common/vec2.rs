@@ -101,6 +101,14 @@ impl Mul<f32> for Vec2 {
     }
 }
 
+impl Mul<Vec2> for f32 {
+	type Output = Vec2;
+
+	fn mul(self, _rhs: Vec2) -> Vec2 {
+		Vec2::new(_rhs.x * self, _rhs.y * self)
+    }
+}
+
 impl MulAssign<f32> for Vec2 {
     fn mul_assign(&mut self, _rhs: f32) {
         self.x *= _rhs;

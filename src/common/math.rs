@@ -1,3 +1,6 @@
+use super::Vec2;
+use super::Rot;
+
 /// "Next Largest Power of 2
 /// Given a binary integer value x, the next largest power of 2 can be computed by a SWAR algorithm
 /// that recursively "folds" the upper bits into the lower bits. This process yields a bit vector with
@@ -14,4 +17,9 @@ pub fn next_power_of_two(mut x: u32) -> u32 {
 
 pub fn is_power_of_two(x: u32) -> bool {
     x > 0 && (x & (x - 1)) == 0
+}
+
+/// Rotate a vector
+pub fn mul_rot_vec2(q: Rot, v: Vec2) -> Vec2 {
+    Vec2::new(q.c * v.x - q.s * v.y, q.s * v.x + q.c * v.y)
 }
