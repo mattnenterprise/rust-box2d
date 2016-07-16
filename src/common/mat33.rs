@@ -9,6 +9,14 @@ pub struct Mat33 {
 }
 
 impl Mat33 {
+    pub fn new() -> Mat33 {
+        Mat33 {
+            ex: Vec3::new(0.0, 0.0, 0.0),
+            ey: Vec3::new(0.0, 0.0, 0.0),
+            ez: Vec3::new(0.0, 0.0, 0.0)
+        }
+    }
+
     pub fn new_columns(c1: Vec3, c2: Vec3, c3: Vec3) -> Mat33 {
         Mat33 {
             ex: c1,
@@ -51,5 +59,22 @@ impl Mat33 {
         let x = det * (a22 * b.x - a12 * b.y);
         let y = det * (a11 * b.y - a21 * b.x);
         Vec2::new(x, y)
+    }
+
+    ///
+    pub fn get_inverse22(&self) -> Mat33 {
+        let a = self.ex.x;
+        let b = self.ey.x;
+        let c = self.ex.y;
+        let d = self.eu.y;
+        let mut det = a * d - b * c;
+        if det != 0.0 {
+            det = 1.0 / det;
+        }
+        let m = Mat33::new();
+        m.ex.x =  det * d;	m.ey.x = -det * b; m.ex.z = 0.0;
+        m.ex.y = -det * c;	m.ey.y =  det * a; m.ey.z = 0.0;
+        m.ez.x = 0.0; m.ez.y = 0.0; m.ez.z = 0.0;
+        return m
     }
 }
