@@ -1,6 +1,6 @@
 use super::super::shape::shape::Shape::{CircleShape, ChainLineShape};
 use super::super::body::Body;
-use super::super::common::math::Vec2;
+use super::super::common::Vec2;
 use super::super::manifold::Manifold;
 use super::collider::Collider;
 use super::collider_result::ColliderResult;

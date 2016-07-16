@@ -1,4 +1,4 @@
-use super::super::common::math::Vec2;
+use super::super::common::Vec2;
 
 #[derive(Clone)]
 pub enum Shape {

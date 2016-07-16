@@ -1,4 +1,4 @@
-use super::common::math::Vec2;
+use super::common::Vec2;
 use super::shape::shape::Shape;
 
 /// The body type.

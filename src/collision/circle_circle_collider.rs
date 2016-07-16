@@ -1,5 +1,5 @@
 use super::super::body::Body;
-use super::super::common::math::Vec2;
+use super::super::common::Vec2;
 use super::super::manifold::Manifold;
 use super::super::shape::shape::Shape::CircleShape;
 use super::collider_result::ColliderResult;
