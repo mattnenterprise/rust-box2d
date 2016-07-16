@@ -20,6 +20,16 @@ impl Vec3 {
 		self.y = y;
         self.z = z;
 	}
+
+    /// Peform the dot product on two vectors
+    pub fn dot(a: Vec3, b: Vec3) -> f32 {
+        a.x * b.x +a.y * b.y + a.z * b.z
+    }
+
+    /// Perform the cross product on two vectors.
+    pub fn cross(a: Vec3, b: Vec3) -> Vec3 {
+        Vec3::new(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x)
+    }
 }
 
 impl Neg for Vec3 {
