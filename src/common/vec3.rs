@@ -1,4 +1,4 @@
-use std::ops::{Neg, AddAssign, SubAssign, MulAssign};
+use std::ops::{Neg, Add, AddAssign, Sub, SubAssign, MulAssign};
 
 pub struct Vec3 {
     pub x: f32,
@@ -40,12 +40,28 @@ impl Neg for Vec3 {
     }
 }
 
+impl Add for Vec3 {
+	type Output = Vec3;
+
+	fn add(self, _rhs: Vec3) -> Vec3 {
+        Vec3::new(self.x + _rhs.x, self.y + _rhs.y, self.z + _rhs.z)
+	}
+}
+
 impl AddAssign for Vec3 {
     fn add_assign(&mut self, _rhs: Vec3) {
         self.x += _rhs.x;
 		self.y += _rhs.y;
         self.z += _rhs.z;
     }
+}
+
+impl Sub for Vec3 {
+	type Output = Vec3;
+
+	fn sub(self, _rhs: Vec3) -> Vec3 {
+		Vec3::new(self.x - _rhs.x, self.y - _rhs.y, self.z - _rhs.z)
+	}
 }
 
 impl SubAssign for Vec3 {

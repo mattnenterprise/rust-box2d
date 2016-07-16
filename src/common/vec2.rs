@@ -67,7 +67,7 @@ impl Add for Vec2 {
 	type Output = Vec2;
 
 	fn add(self, _rhs: Vec2) -> Vec2 {
-		return Vec2::new(self.x + _rhs.x, self.y + _rhs.y);
+		Vec2::new(self.x + _rhs.x, self.y + _rhs.y)
 	}
 }
 
@@ -82,7 +82,7 @@ impl Sub for Vec2 {
 	type Output = Vec2;
 
 	fn sub(self, _rhs: Vec2) -> Vec2 {
-		return Vec2::new(self.x - _rhs.x, self.y - _rhs.y);
+		Vec2::new(self.x - _rhs.x, self.y - _rhs.y)
 	}
 }
 
@@ -97,7 +97,7 @@ impl Mul<f32> for Vec2 {
 	type Output = Vec2;
 
     fn mul(self, _rhs: f32) -> Vec2 {
-        return Vec2::new(self.x * _rhs, self.y * _rhs);
+		Vec2::new(self.x * _rhs, self.y * _rhs)
     }
 }
 
