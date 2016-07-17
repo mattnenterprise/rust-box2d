@@ -30,7 +30,7 @@ const ANGULAR_SLOP: f32 = (2.0 / 180.0 * PI);
 /// The radius of the polygon/edge shape skin. This should not be modified. Making
 /// this smaller means polygons will have an insufficient buffer for continuous collision.
 /// Making it larger may create artifacts for vertex collision.
-const POLYGON_RADIUS: f32 = (2.0 * LINEAR_SLOP);
+pub const POLYGON_RADIUS: f32 = (2.0 * LINEAR_SLOP);
 
 /// Maximum number of sub-steps per contact in continuous physics simulation.
 const MAX_SUB_STEPS: i32 = 8;
