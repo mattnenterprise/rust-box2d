@@ -44,4 +44,10 @@ pub trait Shape {
 	/// The inertia tensor is computed about the local origin.
 	/// @param density the density in kilograms per meter squared.
     fn compute_mass(&self, density: f32) -> MassData;
+
+    /// Get the radius. Regular box2d has this as a base class field.
+    fn get_radius() -> f32;
+
+    /// Set the radius. Regular box2d has this as a base class field.
+    fn set_radius(r: f32);
 }
