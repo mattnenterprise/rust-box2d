@@ -9,5 +9,6 @@ pub mod circle_polygon_collider;
 pub mod polygon_chain_line_collider;
 pub mod polygon_line_collider;
 pub mod polygon_polygon_collider;
+pub mod shapes;
 mod ray_cast_input;
 mod ray_cast_output;
