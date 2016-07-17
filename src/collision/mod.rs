@@ -1,3 +1,4 @@
+pub mod aabb;
 pub mod collider_result;
 pub mod collider;
 pub mod collider_factory;

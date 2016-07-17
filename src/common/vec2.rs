@@ -1,4 +1,5 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign, Neg, Mul, MulAssign};
+use super::math::is_valid;
 
 #[derive(Clone, Copy, Debug)]
 pub struct Vec2 {
@@ -60,6 +61,11 @@ impl Vec2 {
 			panic!("Cannot find normal when length is zero");
 		}
 		return self.divide(length);
+	}
+
+	// Does this vector contain finite coordinates ?
+	pub fn is_valid(self) -> bool {
+		is_valid(self.x) && is_valid(self.y)
 	}
 }
 

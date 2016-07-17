@@ -1,6 +1,11 @@
 use super::Vec2;
 use super::Rot;
 
+// This function is used to ensure that a floating point number of non a NaN or infinity.
+pub fn is_valid(x: f32) -> bool {
+    !(x.is_nan() || x.is_infinite())
+}
+
 /// "Next Largest Power of 2
 /// Given a binary integer value x, the next largest power of 2 can be computed by a SWAR algorithm
 /// that recursively "folds" the upper bits into the lower bits. This process yields a bit vector with
@@ -17,6 +22,22 @@ pub fn next_power_of_two(mut x: u32) -> u32 {
 
 pub fn is_power_of_two(x: u32) -> bool {
     x > 0 && (x & (x - 1)) == 0
+}
+
+/// Get the minumum vector
+pub fn min_vec(a: Vec2, b: Vec2) -> Vec2 {
+    Vec2 {
+        x: a.x.min(b.x),
+        y: a.y.min(b.y)
+    }
+}
+
+/// Get the maximum vector
+pub fn max_vec(a: Vec2, b: Vec2) -> Vec2 {
+    Vec2 {
+        x: a.x.max(b.x),
+        y: a.y.max(b.y)
+    }
 }
 
 /// Rotate a vector
