@@ -11,5 +11,6 @@ pub mod polygon_line_collider;
 pub mod polygon_polygon_collider;
 pub mod shapes;
 pub mod contact_id;
+pub mod manifold_point;
 mod ray_cast_input;
 mod ray_cast_output;
