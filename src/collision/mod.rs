@@ -13,5 +13,6 @@ pub mod shapes;
 pub mod contact_id;
 pub mod manifold_point;
 pub mod manifold;
+pub mod world_manifold;
 mod ray_cast_input;
 mod ray_cast_output;
