@@ -11,7 +11,7 @@ pub struct MassData {
 }
 
 impl MassData {
-    fn new() -> MassData {
+    pub fn new() -> MassData {
         MassData {
             mass: 0.0,
             center: Vec2::zero(),

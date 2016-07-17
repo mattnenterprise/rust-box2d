@@ -33,7 +33,7 @@ pub trait Shape {
 	/// @param input the ray-cast input parameters.
 	/// @param transform the transform to be applied to the shape.
 	/// @param child_index the child shape index
-    fn ray_cast(&self, input: RayCastInput, transform: Transform, child_index: i32) -> (RayCastOutput, bool);
+    fn ray_cast(&self, input: RayCastInput, transform: Transform, child_index: i32) -> Option<RayCastOutput>;
 
     /// Given a transform, compute the associated axis aligned bounding box for a child shape.
 	/// @param xf the world transform of the shape.
@@ -46,8 +46,8 @@ pub trait Shape {
     fn compute_mass(&self, density: f32) -> MassData;
 
     /// Get the radius. Regular box2d has this as a base class field.
-    fn get_radius() -> f32;
+    fn get_radius(&self) -> f32;
 
     /// Set the radius. Regular box2d has this as a base class field.
-    fn set_radius(r: f32);
+    fn set_radius(&mut self, r: f32);
 }

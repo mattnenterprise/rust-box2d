@@ -1,5 +1,6 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign, Neg, Mul, MulAssign};
 use super::math::is_valid;
+use std::f32::EPSILON;
 
 #[derive(Clone, Copy, Debug)]
 pub struct Vec2 {
@@ -61,6 +62,19 @@ impl Vec2 {
 			panic!("Cannot find normal when length is zero");
 		}
 		return self.divide(length);
+	}
+
+	/// Convert this vector into a unit vector. Returns the length.
+	pub fn normalize(&mut self) -> f32 {
+		let length = self.length();
+		if length < EPSILON {
+			return 0.0
+		}
+		let inv_length = 1.0 / length;
+		self.x *= inv_length;
+		self.y *= inv_length;
+
+		return length;
 	}
 
 	// Does this vector contain finite coordinates ?
