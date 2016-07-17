@@ -10,7 +10,7 @@ use std::f32::consts::PI;
 /// we must interpolate the center of mass position.
 pub struct Sweep {
     /// local center of mass position
-    pub localCenter: Vec2,
+    pub local_center: Vec2,
     /// center world positions
     pub c0: Vec2,
     pub c: Vec2,
@@ -25,7 +25,7 @@ pub struct Sweep {
 impl Sweep {
     pub fn new() -> Sweep {
         Sweep {
-            localCenter: Vec2::zero(),
+            local_center: Vec2::zero(),
             c0: Vec2::zero(),
             c: Vec2::zero(),
             a0: 0.0,
@@ -39,7 +39,7 @@ impl Sweep {
     pub fn get_transform(&mut self, beta: f32) -> Transform {
         let angle = (1.0 - beta) * self.a0 + beta * self.a;
         let rot = Rot::new_angle(angle);
-        let p = ((1.0 - beta) * self.c0 + beta * self.c) - mul_rot_vec2(Rot::new_angle(angle), self.localCenter);
+        let p = ((1.0 - beta) * self.c0 + beta * self.c) - mul_rot_vec2(Rot::new_angle(angle), self.local_center);
         Transform::new(p, rot)
     }
 

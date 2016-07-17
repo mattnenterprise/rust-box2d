@@ -26,7 +26,7 @@ impl WorldManifold {
 	/// modest motion from the original state. This does not change the
 	/// point count, impulses, etc. The radii must come from the shapes
 	/// that generated the manifold.
-    pub fn initialize(manifold: Manifold, xf_a: Transform, radius_a: f32, xf_b: Transform, radius_b: f32)  {
+    pub fn initialize(_manifold: Manifold, _xf_a: Transform, _radius_a: f32, _xf_b: Transform, _radius_b: f32)  {
         // TODO implement
     }
 }
