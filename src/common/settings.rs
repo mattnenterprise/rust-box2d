@@ -4,7 +4,7 @@ use std::f32::consts::PI;
 
 /// The maximum number of contact points between two convex shapes. Do
 /// not change this value.
-const MAX_MANIFOLD_POINTS: i32 = 2;
+pub const MAX_MANIFOLD_POINTS: i32 = 2;
 
 /// The maximum number of vertices on a convex polygon.
 const MAX_POLYGON_VERTICES: i32 = 8;

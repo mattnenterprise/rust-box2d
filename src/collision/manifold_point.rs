@@ -11,6 +11,7 @@ use super::contact_id::ContactID;
 /// This structure is stored across time steps, so we keep it small.
 /// Note: the impulses are used for internal caching and may not
 /// provide reliable contact forces, especially for high speed collisions.
+#[derive(Copy,Clone)]
 pub struct ManifoldPoint {
     /// Usage depends on manifold type
     pub local_point: Vec2,
@@ -23,7 +24,7 @@ pub struct ManifoldPoint {
 }
 
 impl ManifoldPoint {
-    fn new() -> ManifoldPoint {
+    pub fn new() -> ManifoldPoint {
         ManifoldPoint {
             local_point: Vec2::zero(),
             normal_impulse: 0.0,

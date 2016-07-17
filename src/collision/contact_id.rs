@@ -5,6 +5,7 @@ enum ContactIDType {
 
 /// Contact ids to facilitate warm starting. Note: the ContactFeature struct is just embedded in here.
 /// A union is used for this type in Box2D. We just embed it.
+#[derive(Copy,Clone)]
 pub struct ContactID {
     pub index_a: u8,
     pub index_b: u8,
