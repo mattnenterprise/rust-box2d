@@ -7,7 +7,7 @@ use std::f32::consts::PI;
 pub const MAX_MANIFOLD_POINTS: i32 = 2;
 
 /// The maximum number of vertices on a convex polygon.
-const MAX_POLYGON_VERTICES: i32 = 8;
+pub const MAX_POLYGON_VERTICES: i32 = 8;
 
 /// The is used to flatten AABBs in the dynamic tree. This allows proxies
 /// to move by a small amount without triggering a tree adjustment.
