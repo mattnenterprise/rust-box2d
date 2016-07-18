@@ -3,6 +3,7 @@ use super::Rot;
 
 /// A transform contains translation and rotation. It is used to represent
 /// the position and orientation of rigid frames.
+#[derive(Copy, Clone)]
 pub struct Transform {
     pub p: Vec2,
     pub q: Rot

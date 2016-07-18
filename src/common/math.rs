@@ -1,5 +1,6 @@
 use super::Vec2;
 use super::Rot;
+use super::Transform;
 
 // This function is used to ensure that a floating point number of non a NaN or infinity.
 pub fn is_valid(x: f32) -> bool {
@@ -43,4 +44,25 @@ pub fn max_vec(a: Vec2, b: Vec2) -> Vec2 {
 /// Rotate a vector
 pub fn mul_rot_vec2(q: Rot, v: Vec2) -> Vec2 {
     Vec2::new(q.c * v.x - q.s * v.y, q.s * v.x + q.c * v.y)
+}
+
+/// Inverse rotate a vector
+pub fn mul_rot_vec2_inverse(q: Rot, v: Vec2) -> Vec2 {
+    Vec2::new(q.c * v.x + q.s * v.y, -q.s * v.x + q.c * v.y)
+}
+
+pub fn mul_transform_vec2(t: Transform, v: Vec2) -> Vec2 {
+	let x = (t.q.c * v.x - t.q.s * v.y) + t.p.x;
+	let y = (t.q.s * v.x + t.q.c * v.y) + t.p.y;
+
+    Vec2::new(x, y)
+}
+
+pub fn mul_transform_vec2_inverse(t: Transform, v: Vec2) -> Vec2 {
+	let px = v.x - t.p.x;
+	let py = v.y - t.p.y;
+	let x = t.q.c * px + t.q.s * py;
+	let y = -t.q.s * px + t.q.c * py;
+
+    Vec2::new(x, y)
 }

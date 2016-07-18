@@ -1,6 +1,7 @@
 use super::Vec2;
 
 /// Rotation
+#[derive(Copy, Clone)]
 pub struct Rot {
     pub s: f32,
     pub c: f32
