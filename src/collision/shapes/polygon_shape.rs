@@ -1,7 +1,7 @@
 use super::super::super::common::settings::{POLYGON_RADIUS, MAX_POLYGON_VERTICES};
 use super::super::super::common::Vec2;
 use super::super::super::common::Transform;
-use super::super::super::common::math::{mul_rot_vec2, mul_rot_vec2_inverse, mul_transform_vec2, min_vec, max_vec};
+//use super::super::super::common::math::{mul_rot_vec2, mul_rot_vec2_inverse, mul_transform_vec2, min_vec, max_vec};
 use super::super::ray_cast_input::RayCastInput;
 use super::super::ray_cast_output::RayCastOutput;
 use super::super::aabb::AABB;
@@ -47,7 +47,7 @@ impl Shape for PolygonShape {
     /// Test a point for containment in this shape. This only works for convex shapes.
     /// @param xf the shape world transform.
     /// @param p a point in world coordinates.
-    fn test_point(&self, xf: Transform, p: Vec2) -> bool {
+    fn test_point(&self, _: Transform, _: Vec2) -> bool {
         // TODO implement
         false
     }
@@ -57,7 +57,7 @@ impl Shape for PolygonShape {
 	/// @param input the ray-cast input parameters.
 	/// @param transform the transform to be applied to the shape.
 	/// @param child_index the child shape index
-    fn ray_cast(&self, input: RayCastInput, transform: Transform, child_index: i32) -> Option<RayCastOutput> {
+    fn ray_cast(&self, _: RayCastInput, _: Transform, _: i32) -> Option<RayCastOutput> {
         // TODO implement
         None
     }
@@ -65,7 +65,7 @@ impl Shape for PolygonShape {
     /// Given a transform, compute the associated axis aligned bounding box for a child shape.
 	/// @param xf the world transform of the shape.
 	/// @param child_index the child shape.
-    fn compute_aabb(&self, xf: Transform, child_index: i32) -> AABB {
+    fn compute_aabb(&self, _: Transform, _: i32) -> AABB {
         // TODO implement
         AABB::new()
     }
@@ -73,7 +73,7 @@ impl Shape for PolygonShape {
     /// Compute the mass properties of this shape using its dimensions and density.
 	/// The inertia tensor is computed about the local origin.
 	/// @param density the density in kilograms per meter squared.
-    fn compute_mass(&self, density: f32) -> MassData {
+    fn compute_mass(&self, _: f32) -> MassData {
         // TODO implement
         MassData::new()
     }

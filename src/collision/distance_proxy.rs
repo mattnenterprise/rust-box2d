@@ -17,7 +17,7 @@ impl DistanceProxy {
     }
 
     // TODO implement
-    pub fn set<T: Shape>(shape: T, index: i32)  {
+    pub fn set<T: Shape>(_: T, _: i32)  {
 
     }
 
