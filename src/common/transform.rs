@@ -11,9 +11,16 @@ pub struct Transform {
 
 impl Transform {
     pub fn new(position: Vec2, rotation: Rot) -> Transform {
-        return Transform {
+        Transform {
             p: position,
             q: rotation
+        }
+    }
+
+    pub fn zero() -> Transform {
+        Transform {
+            p: Vec2::zero(),
+            q: Rot::new()
         }
     }
 

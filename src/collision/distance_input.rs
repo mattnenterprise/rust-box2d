@@ -17,8 +17,8 @@ impl DistanceInput {
         DistanceInput {
             proxy_a: DistanceProxy::new(),
             proxy_b: DistanceProxy::new(),
-            transform_a: Transform::new(),
-            transform_b: Transform::new(),
+            transform_a: Transform::zero(),
+            transform_b: Transform::zero(),
             use_radii: false
         }
     }
