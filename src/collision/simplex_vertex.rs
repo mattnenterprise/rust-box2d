@@ -1,3 +1,5 @@
+use super::super::common::Vec2;
+
 pub struct SimplexVertex {
     /// Support point for proxy_a
     pub w_a: Vec2,
