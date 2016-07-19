@@ -16,6 +16,7 @@ pub mod manifold;
 pub mod world_manifold;
 pub mod ray_cast_input;
 pub mod ray_cast_output;
+pub mod distance_input;
 pub mod distance_output;
 pub mod simplex_cache;
 pub mod distance_proxy;

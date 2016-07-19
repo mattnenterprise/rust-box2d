@@ -1,3 +1,5 @@
+/// Used to warm start Distance.
+/// Set count to zero on first call.
 pub struct SimplexCache {
     pub metric: f32,
     pub count: i16,
