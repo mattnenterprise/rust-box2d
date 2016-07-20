@@ -48,6 +48,10 @@ const _VELOCITY_THRESHOLD: f32 = 1.0;
 /// prevent overshoot.
 const _MAX_LINEAR_CORRECTION: f32 = 0.2;
 
+/// The maximum angular position correction used when solving constraints. This helps to
+/// prevent overshoot.
+const _MAX_ANGULAR_CORRECTION: f32 = (8.0 / 180.0 * PI);
+
 /// The maximum linear velocity of a body. This limit is very large and is used
 /// to prevent numerical problems. You shouldn't need to adjust this.
 const _MAX_TRANSLATION: f32 = 2.0;
