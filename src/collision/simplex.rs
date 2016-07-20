@@ -1,3 +1,5 @@
+use super::simplex_vertex::SimplexVertex;
+
 pub struct Simplex {
     pub m_v1: SimplexVertex,
     pub m_v2: SimplexVertex,
