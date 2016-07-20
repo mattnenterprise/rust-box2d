@@ -1,4 +1,4 @@
-use super::super::collision::shape::Shape;
+use super::super::collision::shapes::shape::Shape;
 use super::filter::Filter;
 
 /// A fixture definition is used to create a fixture. This class defines an
@@ -10,7 +10,7 @@ pub struct FixtureDef<T: Shape> {
     pub shape: T,
     // TODO user_data
     /// The friction coefficient, usually in the range [0,1].
-    pub friction: f32
+    pub friction: f32,
     /// The restitution (elasticity) usually in the range [0,1].
     pub restitution: f32,
     /// The density, usually in kg/m^2.
@@ -22,7 +22,7 @@ pub struct FixtureDef<T: Shape> {
 }
 
 impl<T: Shape> FixtureDef<T> {
-    fn new<T: Shape>(shape: T) -> FixtureDef<Shape> {
+    fn new(shape: T) -> FixtureDef<T> {
         FixtureDef {
             shape: shape,
             // TODO user_data

@@ -8,6 +8,7 @@ pub mod world;
 pub mod body;
 pub mod shape;
 pub mod collision;
+pub mod dynamics;
 pub mod broad_phase;
 pub mod narrow_phase;
 pub mod collision_resolution;

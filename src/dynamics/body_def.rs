@@ -6,7 +6,7 @@ use super::body_type::BodyType;
 pub struct BodyDef {
     /// The body type: static, kinematic, or dynamic.
 	/// Note: if a dynamic body would have zero mass, the mass is set to one.
-    pub type: BodyType,
+    pub typ: BodyType,
     /// The world position of the body. Avoid creating bodies at the origin
 	/// since this can lead to many overlapping shapes.
     pub position: Vec2,
@@ -45,7 +45,7 @@ pub struct BodyDef {
 impl BodyDef {
     pub fn new() -> BodyDef {
         BodyDef {
-            type: BodyType::StaticBody,
+            typ: BodyType::StaticBody,
             position: Vec2::zero(),
             angle: 0.0,
             linear_velocity: Vec2::zero(),
