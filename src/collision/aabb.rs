@@ -66,3 +66,19 @@ impl AABB {
     // TODO implement ray_cast
     // pub fn ray_cast(input: RayCastInput) -> RayCastOutput
 }
+
+/// Determine if AABB overlap
+pub fn test_aabb_overlap(a: AABB, b: AABB) -> bool {
+    let d1 = b.lower_bound - a.upper_bound;
+    let d2 = a.lower_bound - b.upper_bound;
+
+    if d1.x > 0.0 || d1.y > 0.0 {
+        return false;
+    }
+
+    if d2.x > 0.0 || d2.y > 0.0 {
+        return false;
+    }
+
+    return true;
+}
