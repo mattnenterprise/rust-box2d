@@ -1,5 +1,8 @@
 use super::super::common::Vec2;
-use super::super::common::math::{min_vec, max_vec};
+use super::super::common::math::{min_vec, max_vec, abs_vec};
+use super::ray_cast_input::RayCastInput;
+use super::ray_cast_output::RayCastOutput;
+use std::f32;
 
 pub struct AABB {
     /// The lower vertex
@@ -63,8 +66,103 @@ impl AABB {
         return result;
     }
 
-    // TODO implement ray_cast
-    // pub fn ray_cast(input: RayCastInput) -> RayCastOutput
+    // TODO Does this work ?
+    // From Real-time Collision Detection, p179.
+    pub fn ray_cast(&self, input: RayCastInput) -> Option<RayCastOutput> {
+        let mut tmin = -f32::MAX;
+        let mut tmax = f32::MAX;
+
+        let p = input.p1;
+        let d = input.p2 - input.p1;
+        let abs_d = abs_vec(d);
+
+        let mut normal = Vec2::zero();
+
+        // Do x
+        if abs_d.x < f32::EPSILON {
+			// Parallel.
+			if p.x < self.lower_bound.x || self.upper_bound.x < p.x {
+				return None;
+			}
+		} else {
+			let inv_d = 1.0 / d.x;
+			let mut t1 = (self.lower_bound.x - p.x) * inv_d;
+			let mut t2 = (self.upper_bound.x - p.x) * inv_d;
+
+			// Sign of the normal vector.
+			let mut s = -1.0;
+
+			if t1 > t2
+			{
+                let tmp = t1;
+                t1 = t2;
+                t2 = tmp;
+				s = 1.0;
+			}
+
+			// Push the min up
+			if t1 > tmin {
+				normal.set_zero();
+				normal.x = s;
+				tmin = t1;
+			}
+
+			// Pull the max down
+			tmax = tmax.min(t2);
+
+			if tmin > tmax {
+				return None;
+			}
+		}
+
+
+
+        // Do y
+        if abs_d.y < f32::EPSILON {
+			// Parallel.
+			if p.y < self.lower_bound.y || self.upper_bound.y < p.y {
+				return None;
+			}
+		} else {
+			let inv_d = 1.0 / d.y;
+			let mut t1 = (self.lower_bound.y - p.y) * inv_d;
+			let mut t2 = (self.upper_bound.y - p.y) * inv_d;
+
+			// Sign of the normal vector.
+			let mut s = -1.0;
+
+			if t1 > t2
+			{
+                let tmp = t1;
+                t1 = t2;
+                t2 = tmp;
+				s = 1.0;
+			}
+
+			// Push the min up
+			if t1 > tmin {
+				normal.set_zero();
+				normal.y = s;
+				tmin = t1;
+			}
+
+			// Pull the max down
+			tmax = tmax.min(t2);
+
+			if tmin > tmax {
+				return None;
+			}
+		}
+
+        if tmin < 0.0 || input.max_fraction < tmin {
+            return None;
+        }
+
+        Some(RayCastOutput {
+            fraction: tmin,
+            normal: normal
+        })
+    }
 }
 
 /// Determine if AABB overlap

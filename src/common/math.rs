@@ -41,6 +41,10 @@ pub fn max_vec(a: Vec2, b: Vec2) -> Vec2 {
     }
 }
 
+pub fn abs_vec(a: Vec2) -> Vec2 {
+    Vec2::new(a.x.abs(), a.y.abs())
+}
+
 /// Rotate a vector
 pub fn mul_rot_vec2(q: Rot, v: Vec2) -> Vec2 {
     Vec2::new(q.c * v.x - q.s * v.y, q.s * v.x + q.c * v.y)
