@@ -1,4 +1,6 @@
 use super::simplex_vertex::SimplexVertex;
+use super::super::common::math::vec_distance;
+use super::super::common::Vec2;
 
 pub struct Simplex {
     pub m_v1: SimplexVertex,
@@ -23,9 +25,24 @@ impl Simplex {
     // TODO implement
     // pub fn get_witness_points()
 
-    // TODO implement
-    pub fn get_metric() -> f32 {
-        0.0
+    pub fn get_metric(&self) -> f32 {
+        match self.m_count {
+            0 => {
+                assert!(false);
+                return 0.0;
+            },
+            1 => 0.0,
+            2 => {
+                return vec_distance(self.m_v1.w, self.m_v2.w);
+            },
+            3 => {
+                return Vec2::cross_vec(self.m_v2.w - self.m_v1.w, self.m_v3.w - self.m_v1.w);
+            },
+            _ => {
+                assert!(false);
+                return 0.0;
+            }
+        }
     }
 
     // TODO implement

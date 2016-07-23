@@ -25,6 +25,11 @@ pub fn is_power_of_two(x: u32) -> bool {
     x > 0 && (x & (x - 1)) == 0
 }
 
+pub fn vec_distance(a: Vec2, b: Vec2) -> f32 {
+    let c = a - b;
+    c.length()
+}
+
 pub fn vec_distance_squared(a: Vec2, b: Vec2) -> f32 {
     let c = a - b;
     Vec2::dot(c, c)
