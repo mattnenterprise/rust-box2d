@@ -1,6 +1,6 @@
-enum ContactIDType {
-    VERTEX = 0,
-    FACE = 1
+pub enum ContactIDType {
+    Vertex = 0,
+    Face = 1
 }
 
 /// Contact ids to facilitate warm starting. Note: the ContactFeature struct is just embedded in here.
