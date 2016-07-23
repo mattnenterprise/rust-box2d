@@ -1,5 +1,6 @@
 pub mod aabb;
 pub mod collide_circle;
+pub mod collide_edge;
 pub mod collider_result;
 pub mod collider;
 pub mod collider_factory;
