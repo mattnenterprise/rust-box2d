@@ -19,8 +19,27 @@ impl Simplex {
     // TODO implement {
     // pub fn get_search_direction() -> Vec2
 
-    // TODO implement
-    // pub fn get_closest_point() -> Vec2
+    pub fn get_closest_point(&self) -> Vec2 {
+        match self.m_count {
+            0 => {
+                assert!(false);
+                return Vec2::zero();
+            },
+            1 => {
+                return self.m_v1.w;
+            },
+            2 => {
+                return self.m_v1.a * self.m_v1.w + self.m_v2.a * self.m_v2.w;
+            },
+            3 => {
+                return Vec2::zero();
+            },
+            _ => {
+                assert!(false);
+                return Vec2::zero();
+            }
+        }
+    }
 
     pub fn get_witness_points(&self) -> (Vec2, Vec2) {
         match self.m_count {
