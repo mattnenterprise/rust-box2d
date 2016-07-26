@@ -1,5 +1,6 @@
 use super::super::common::Vec2;
 
+#[derive(Clone, Copy)]
 pub struct SimplexVertex {
     /// Support point for proxy_a
     pub w_a: Vec2,

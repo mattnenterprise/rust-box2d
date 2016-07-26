@@ -105,9 +105,34 @@ impl Simplex {
         }
     }
 
-    // TODO implement
-    pub fn solve_2() {
+    pub fn solve_2(&mut self) {
+        let w1 = self.m_v1.w;
+        let w2 = self.m_v2.w;
+        let e12 = w2 - w1;
 
+        // w1 region
+        let d12_2 = - Vec2::dot(w1, e12);
+        if d12_2 <= 0.0 {
+            // a2 <= 0, so we clamp it to 0
+            self.m_v1.a = 1.0;
+            self.m_count = 1;
+            return;
+        }
+
+        // w2 region
+        let d12_1 = Vec2::dot(w2, e12);
+        if d12_1 <= 0.0 {
+            // a1 <= 0, so we clamp it to 0
+            self.m_v1.a = 1.0;
+            self.m_count = 1;
+            self.m_v1 = self.m_v2.clone();
+            return;
+        }
+
+        let inv_d12 = 1.0 / (d12_1 + d12_2);
+        self.m_v1.a = d12_1 * inv_d12;
+        self.m_v2.a = d12_2 * inv_d12;
+        self.m_count = 2;
     }
 
     // TODO implement
