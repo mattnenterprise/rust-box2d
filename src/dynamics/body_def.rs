@@ -39,6 +39,7 @@ pub struct BodyDef {
     /// Does this body start out active?
     pub active: bool,
     // TODO user_data
+    /// Scale the gravity applied to this body.
     pub gravity_scale: f32
 }
 
@@ -57,7 +58,7 @@ impl BodyDef {
             fixed_rotation: false,
             bullet: false,
             active: true,
-            // TODO user_data
+            // TODO add user_data
             gravity_scale: 1.0
         }
     }
