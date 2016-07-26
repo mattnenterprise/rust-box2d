@@ -6,6 +6,7 @@ pub struct TOIInput {
     pub proxy_b: DistanceProxy,
     pub sweep_a: Sweep,
     pub sweep_b: Sweep,
+    // defines sweep interval [0, tMax]
     pub t_max: f32
 }
 
