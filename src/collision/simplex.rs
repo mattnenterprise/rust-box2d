@@ -105,6 +105,29 @@ impl Simplex {
         }
     }
 
+    // Solve a line segment using barycentric coordinates.
+    //
+    // p = a1 * w1 + a2 * w2
+    // a1 + a2 = 1
+    //
+    // The vector from the origin to the closest point on the line is
+    // perpendicular to the line.
+    // e12 = w2 - w1
+    // dot(p, e) = 0
+    // a1 * dot(w1, e) + a2 * dot(w2, e) = 0
+    //
+    // 2-by-2 linear system
+    // [1      1     ][a1] = [1]
+    // [w1.e12 w2.e12][a2] = [0]
+    //
+    // Define
+    // d12_1 =  dot(w2, e12)
+    // d12_2 = -dot(w1, e12)
+    // d12 = d12_1 + d12_2
+    //
+    // Solution
+    // a1 = d12_1 / d12
+    // a2 = d12_2 / d12
     pub fn solve_2(&mut self) {
         let w1 = self.m_v1.w;
         let w2 = self.m_v2.w;
