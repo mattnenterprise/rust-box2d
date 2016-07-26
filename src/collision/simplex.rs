@@ -158,8 +158,110 @@ impl Simplex {
         self.m_count = 2;
     }
 
-    // TODO implement
-    pub fn solve_3() {
+    // Possible regions:
+    // - points[2]
+    // - edge points[0]-points[2]
+    // - edge points[1]-points[2]
+    // - inside the triangle
+    pub fn solve_3(&mut self) {
+        let w1 = self.m_v1.w;
+        let w2 = self.m_v2.w;
+        let w3 = self.m_v3.w;
 
+        // Edge12
+    	// [1      1     ][a1] = [1]
+    	// [w1.e12 w2.e12][a2] = [0]
+    	// a3 = 0
+    	let e12 = w2 - w1;
+    	let w1e12 = Vec2::dot(w1, e12);
+    	let w2e12 = Vec2::dot(w2, e12);
+    	let d12_1 = w2e12;
+    	let d12_2 = -w1e12;
+
+        // Edge13
+    	// [1      1     ][a1] = [1]
+    	// [w1.e13 w3.e13][a3] = [0]
+    	// a2 = 0
+    	let e13 = w3 - w1;
+    	let w1e13 = Vec2::dot(w1, e13);
+    	let w3e13 = Vec2::dot(w3, e13);
+    	let d13_1 = w3e13;
+    	let d13_2 = -w1e13;
+
+        // Edge23
+    	// [1      1     ][a2] = [1]
+    	// [w2.e23 w3.e23][a3] = [0]
+    	// a1 = 0
+    	let e23 = w3 - w2;
+    	let w2e23 = Vec2::dot(w2, e23);
+    	let w3e23 = Vec2::dot(w3, e23);
+    	let d23_1 = w3e23;
+    	let d23_2 = -w2e23;
+
+        // Triangle123
+    	let n123 = Vec2::cross_vec(e12, e13);
+
+    	let d123_1 = n123 * Vec2::cross_vec(w2, w3);
+    	let d123_2 = n123 * Vec2::cross_vec(w3, w1);
+    	let d123_3 = n123 * Vec2::cross_vec(w1, w2);
+
+        // w1 region
+    	if d12_2 <= 0.0 && d13_2 <= 0.0 {
+    		self.m_v1.a = 1.0;
+    		self.m_count = 1;
+    		return;
+    	}
+
+        // e12
+    	if d12_1 > 0.0 && d12_2 > 0.0 && d123_3 <= 0.0 {
+    		let inv_d12 = 1.0 / (d12_1 + d12_2);
+    		self.m_v1.a = d12_1 * inv_d12;
+    		self.m_v2.a = d12_2 * inv_d12;
+    		self.m_count = 2;
+    		return;
+    	}
+
+        // e13
+    	if d13_1 > 0.0 && d13_2 > 0.0 && d123_2 <= 0.0 {
+    		let inv_d13 = 1.0 / (d13_1 + d13_2);
+    		self.m_v1.a = d13_1 * inv_d13;
+    		self.m_v3.a = d13_2 * inv_d13;
+    		self.m_count = 2;
+    		self.m_v2 = self.m_v3.clone();
+    		return;
+    	}
+
+        // w2 region
+    	if d12_1 <= 0.0 && d23_2 <= 0.0 {
+    		self.m_v2.a = 1.0;
+    		self.m_count = 1;
+    		self.m_v1 = self.m_v2.clone();
+    		return;
+    	}
+
+        // w3 region
+    	if d13_1 <= 0.0 && d23_1 <= 0.0 {
+    		self.m_v3.a = 1.0;
+    		self.m_count = 1;
+    		self.m_v1 = self.m_v3.clone();
+    		return;
+    	}
+
+        // e23
+    	if d23_1 > 0.0 && d23_2 > 0.0 && d123_1 <= 0.0 {
+    		let inv_d23 = 1.0 / (d23_1 + d23_2);
+    		self.m_v2.a = d23_1 * inv_d23;
+    		self.m_v3.a = d23_2 * inv_d23;
+    		self.m_count = 2;
+    		self.m_v1 = self.m_v3.clone();
+    		return;
+    	}
+
+        // Must be in triangle123
+    	let inv_d123 = 1.0 / (d123_1 + d123_2 + d123_3);
+    	self.m_v1.a = d123_1 * inv_d123;
+    	self.m_v2.a = d123_2 * inv_d123;
+    	self.m_v3.a = d123_3 * inv_d123;
+    	self.m_count = 3;
     }
 }
