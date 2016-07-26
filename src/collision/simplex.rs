@@ -16,8 +16,28 @@ impl Simplex {
     // TODO implement
     // pub fn write_cache()
 
-    // TODO implement {
-    // pub fn get_search_direction() -> Vec2
+    pub fn get_search_direction(&self) -> Vec2 {
+        match self.m_count {
+            1 => {
+                return -self.m_v1.w;
+            },
+            2 => {
+                let e12 = self.m_v2.w - self.m_v1.w;
+                let sgn = Vec2::cross_vec(e12, -self.m_v1.w);
+                if sgn > 0.0 {
+                    // Origin is left of e12.
+                    return Vec2::cross_scalar_vec(1.0, e12);
+                } else {
+                    // Origin is right of e12.
+					return Vec2::cross_vec_scalar(e12, 1.0);
+                }
+            },
+            _ => {
+                assert!(false);
+                return Vec2::zero();
+            }
+        }
+    }
 
     pub fn get_closest_point(&self) -> Vec2 {
         match self.m_count {
