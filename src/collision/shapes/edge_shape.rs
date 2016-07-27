@@ -6,8 +6,13 @@ use super::super::ray_cast_input::RayCastInput;
 use super::super::ray_cast_output::RayCastOutput;
 use super::super::aabb::AABB;
 use super::shape::{Shape, ShapeType};
+use super::to_derived_shape::ToDerivedShape;
+use super::circle_shape::CircleShape;
+use super::polygon_shape::PolygonShape;
+use super::chain_shape::ChainShape;
 use super::mass_data::MassData;
 
+#[derive(Clone, Copy)]
 pub struct EdgeShape {
     /// Edge vertex
     pub m_vertex1: Vec2,
@@ -145,5 +150,23 @@ impl Shape for EdgeShape {
     /// Set the radius. Regular box2d has this as a base class field.
     fn set_radius(&mut self, r: f32) {
         self.m_radius = r;
+    }
+}
+
+impl ToDerivedShape for EdgeShape {
+    fn circle(&self) -> Option<CircleShape> {
+        None
+    }
+
+    fn edge(&self) -> Option<EdgeShape> {
+        Some(*self)
+    }
+
+    fn polygon(&self) -> Option<PolygonShape> {
+        None
+    }
+
+    fn chain(&self) -> Option<ChainShape> {
+        None
     }
 }

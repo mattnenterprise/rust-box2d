@@ -6,12 +6,17 @@ use super::super::ray_cast_input::RayCastInput;
 use super::super::ray_cast_output::RayCastOutput;
 use super::super::aabb::AABB;
 use super::shape::{Shape, ShapeType};
+use super::to_derived_shape::ToDerivedShape;
+use super::edge_shape::EdgeShape;
+use super::circle_shape::CircleShape;
+use super::chain_shape::ChainShape;
 use super::mass_data::MassData;
 
 /// A convex polygon. It is assumed that the interior of the polygon is to
 /// the left of each edge.
 /// Polygons have a maximum number of vertices equal to b2_maxPolygonVertices.
 /// In most cases you should not need many vertices for a convex polygon.
+#[derive(Clone, Copy)]
 pub struct PolygonShape {
     pub m_centroid: Vec2,
     pub m_vertices: [Vec2; MAX_POLYGON_VERTICES as usize],
@@ -86,5 +91,23 @@ impl Shape for PolygonShape {
     /// Set the radius. Regular box2d has this as a base class field.
     fn set_radius(&mut self, r: f32) {
         self.m_radius = r;
+    }
+}
+
+impl ToDerivedShape for PolygonShape {
+    fn circle(&self) -> Option<CircleShape> {
+        None
+    }
+
+    fn edge(&self) -> Option<EdgeShape> {
+        None
+    }
+
+    fn polygon(&self) -> Option<PolygonShape> {
+        Some(*self)
+    }
+
+    fn chain(&self) -> Option<ChainShape> {
+        None
     }
 }

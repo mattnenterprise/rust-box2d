@@ -115,6 +115,7 @@ impl Shape for CircleShape {
         self.m_radius = r;
     }
 }
+
 impl ToDerivedShape for CircleShape {
     fn circle(&self) -> Option<CircleShape> {
         Some(*self)
