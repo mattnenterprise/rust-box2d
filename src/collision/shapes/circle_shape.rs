@@ -5,11 +5,16 @@ use super::super::ray_cast_input::RayCastInput;
 use super::super::ray_cast_output::RayCastOutput;
 use super::super::aabb::AABB;
 use super::shape::{Shape, ShapeType};
+use super::to_derived_shape::ToDerivedShape;
+use super::edge_shape::EdgeShape;
+use super::polygon_shape::PolygonShape;
+use super::chain_shape::ChainShape;
 use super::mass_data::MassData;
 use std::f32::consts::PI;
 use std::f32::EPSILON;
 
 /// A circle shape.
+#[derive(Clone, Copy)]
 pub struct CircleShape {
     pub m_p: Vec2,
     pub m_radius: f32
@@ -108,5 +113,22 @@ impl Shape for CircleShape {
     /// Set the radius. Regular box2d has this as a base class field.
     fn set_radius(&mut self, r: f32) {
         self.m_radius = r;
+    }
+}
+impl ToDerivedShape for CircleShape {
+    fn circle(&self) -> Option<CircleShape> {
+        Some(*self)
+    }
+
+    fn edge(&self) -> Option<EdgeShape> {
+        None
+    }
+
+    fn polygon(&self) -> Option<PolygonShape> {
+        None
+    }
+
+    fn chain(&self) -> Option<ChainShape> {
+        None
     }
 }
